@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Detalhes do Cliente</title>
+    <meta charset="UTF-8">
+    <!-- bootstrap 5.1 via CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- cliente list table-->
+    <h1>Detalhes do Cliente: <span th:text="${nome}"></span></h1>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <td th:text="${id}"></td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <td th:text="${nome}"></td>
+        </tr>
+        <th>CPF</th>
+        <td th:text="${cpf}"></td>
+        </tr>
+        <tr>
+            <th>RG</th>
+            <td th:text="${rg}"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${email}"></td>
+        </tr>
+        <tr>
+            <th>Endereço</th>
+            <td th:text="${endereco}"></td>
+        </tr>
+        <tr>
+            <th>Profissão</th>
+            <td th:text="${profissao}"></td>
+        </tr>
+        <tr>
+            <th>Entidade Empregadora</th>
+            <td th:text="${entidadeEmpregadora}"></td>
+        </tr>
+        <tr>
+            <th>Rendimentos Auferidos</th>
+            <td>
+                <ul th:each="rendimento : ${rendimentosAuferidos}">
+                    <li th:text="${rendimento}"></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <style>
+        /* get Roboto font from google fonts */
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+        /* somewhat gray blackground, table with yellow borders and centered text */
+        body {
+            background-color: #757575;
+            color: #fff;
+            /* use roboto typeface */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            /* border-collapse: collapse; */
+            margin: 0 auto;
+            /* some shadows */
+            box-shadow: 0 0 10px #fff;
+            border-radius: 20px;
+            overflow: hidden
+        }
+
+        td,
+        th {
+            padding: 10px;
+        }
+
+        th {
+            /* align right */
+            text-align: right;
+        }
+
+        /* alternating row colors */
+        tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+
+</body>
+
+</html>

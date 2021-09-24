@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Clientes</title>
+    <meta charset="UTF-8">
+    <!-- bootstrap 5.1 via CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- cliente list table-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>RG</th>
+                <th>Email</th>
+                <th>Endereço</th>
+                <th>Profissão</th>
+                <th>Entidade Empregadora</th>
+                <th>Rendimentos Auferidos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- iterate over model clientes in Java spring boot template syntax -->
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.cpf}"></td>
+                <td th:text="${cliente.rg}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td th:text="${cliente.endereco}"></td>
+                <td th:text="${cliente.profissao}"></td>
+                <td th:text="${cliente.entidadeEmpregadora}"></td>
+                <td th:text="${cliente.rendimentosAuferidos}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
