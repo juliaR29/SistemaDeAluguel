@@ -17,7 +17,6 @@ public class Cliente {
     private String entidadeEmpregadora;
     private ArrayList<Double> rendimentosAuferidos;
 
-    // All Getters and Setters
     public String getId() {
         return id;
     }
@@ -103,21 +102,29 @@ public class Cliente {
         this.rendimentosAuferidos = rendimentosAuferidos;
     }
 
+    public Cliente() {
+        this.id = "";
+        this.nome = "";
+        this.cpf = "";
+        this.rg = "";
+        this.email = "";
+        this.endereco = "";
+        this.profissao = "";
+        this.entidadeEmpregadora = "";
+        this.rendimentosAuferidos = new ArrayList<>();
+    }
+
     public static Cliente loadFromTextFile(String fileName) throws IOException {
-        // reads the entire file contents
         String content = new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8);
 
-        // splits the content by the new line character
         String[] lines = content.split("\n");
 
-        // Converts the last line into a list of double values
         ArrayList<Double> rendimentosAuferidos = new ArrayList<Double>();
         String[] rendimentos = lines[8].split(";");
         for (String rendimento : rendimentos) {
             rendimentosAuferidos.add(Double.parseDouble(rendimento));
         }
 
-        // Extract all fields into local variables
         String id = lines[0];
         String nome = lines[1];
         String cpf = lines[2];
@@ -127,9 +134,35 @@ public class Cliente {
         String profissao = lines[6];
         String entidadeEmpregadora = lines[7];
 
-        // creates a new instance of the class with all the fields
         return new Cliente(id, nome, cpf, rg, email, endereco, profissao, entidadeEmpregadora, rendimentosAuferidos);
 
+    }
+
+    public void saveToTextFile(String fileName) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.id);
+        sb.append("\n");
+        sb.append(this.nome);
+        sb.append("\n");
+        sb.append(this.cpf);
+        sb.append("\n");
+        sb.append(this.rg);
+        sb.append("\n");
+        sb.append(this.email);
+        sb.append("\n");
+        sb.append(this.endereco);
+        sb.append("\n");
+        sb.append(this.profissao);
+        sb.append("\n");
+        sb.append(this.entidadeEmpregadora);
+        sb.append("\n");
+
+        for (Double rendimento : this.rendimentosAuferidos) {
+            sb.append(rendimento);
+            sb.append(";");
+        }
+
+        Files.write(Paths.get(fileName), sb.toString().getBytes());
     }
 
 }

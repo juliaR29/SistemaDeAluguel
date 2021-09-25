@@ -1,0 +1,9 @@
+3
+Juvenal
+123.456.789-00
+14.567.890
+juvenal@gmail.com
+Rua Sergipe, 302
+Empresário
+Autônomo
+10000.0;3000.0;6000.0;
