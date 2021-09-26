@@ -6,24 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Cliente {
-    private String id;
+public class Cliente extends Usuario {
+
     private String nome;
     private String cpf;
     private String rg;
-    private String email;
     private String endereco;
     private String profissao;
     private String entidadeEmpregadora;
     private ArrayList<Double> rendimentosAuferidos;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -47,14 +38,6 @@ public class Cliente {
 
     public void setRg(String rg) {
         this.rg = rg;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getEndereco() {
@@ -89,25 +72,11 @@ public class Cliente {
         this.rendimentosAuferidos = rendimentosAuferidos;
     }
 
-    public Cliente(String id, String nome, String cpf, String rg, String email, String endereco, String profissao,
-            String entidadeEmpregadora, ArrayList<Double> rendimentosAuferidos) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.email = email;
-        this.endereco = endereco;
-        this.profissao = profissao;
-        this.entidadeEmpregadora = entidadeEmpregadora;
-        this.rendimentosAuferidos = rendimentosAuferidos;
-    }
-
     public Cliente() {
-        this.id = "";
+        super();
         this.nome = "";
         this.cpf = "";
         this.rg = "";
-        this.email = "";
         this.endereco = "";
         this.profissao = "";
         this.entidadeEmpregadora = "";
@@ -133,8 +102,21 @@ public class Cliente {
         String endereco = lines[5];
         String profissao = lines[6];
         String entidadeEmpregadora = lines[7];
+        String senha = lines[9];
 
-        return new Cliente(id, nome, cpf, rg, email, endereco, profissao, entidadeEmpregadora, rendimentosAuferidos);
+        Cliente cliente = new Cliente();
+        cliente.setId(id);
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
+        cliente.setRg(rg);
+        cliente.setEmail(email);
+        cliente.setEndereco(endereco);
+        cliente.setProfissao(profissao);
+        cliente.setEntidadeEmpregadora(entidadeEmpregadora);
+        cliente.setRendimentosAuferidos(rendimentosAuferidos);
+        cliente.setSenha(senha);
+
+        return cliente;
 
     }
 
@@ -161,8 +143,12 @@ public class Cliente {
             sb.append(rendimento);
             sb.append(";");
         }
+        sb.append("\n");
 
-        Files.write(Paths.get(fileName), sb.toString().getBytes());
+        sb.append(this.senha);
+        sb.append("\n");
+
+        Files.writeString(Paths.get(fileName), sb.toString(), StandardCharsets.UTF_8);
     }
 
 }

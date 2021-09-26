@@ -10,48 +10,76 @@
 </head>
 
 <body>
+    <header th:include="menu :: menu"></header>
     <h1>Detalhes do Cliente: <span th:text="${cliente.nome}"></span></h1>
+
     <table>
-        <tr>
-            <th>ID</th>
-            <td th:text="${cliente.id}"></td>
-        </tr>
-        <tr>
-            <th>Nome</th>
-            <td th:text="${cliente.nome}"></td>
-        </tr>
-        <th>CPF</th>
-        <td th:text="${cliente.cpf}"></td>
-        </tr>
-        <tr>
-            <th>RG</th>
-            <td th:text="${cliente.rg}"></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td th:text="${cliente.email}"></td>
-        </tr>
-        <tr>
-            <th>Endereço</th>
-            <td th:text="${cliente.endereco}"></td>
-        </tr>
-        <tr>
-            <th>Profissão</th>
-            <td th:text="${cliente.profissao}"></td>
-        </tr>
-        <tr>
-            <th>Entidade Empregadora</th>
-            <td th:text="${cliente.entidadeEmpregadora}"></td>
-        </tr>
-        <tr>
-            <th>Rendimentos Auferidos</th>
-            <td>
-                <ul th:each="rendimento : ${cliente.rendimentosAuferidos}">
-                    <li th:text="${rendimento}"></li>
-                </ul>
-            </td>
-        </tr>
+        <form th:action="@{/cliente/{id}(id=${cliente.id})}" th:object="${cliente}" method="post">
+            <input type="hidden" name="_method" value="PUT">
+            <tr>
+                <th>ID</th>
+                <td th:text="${cliente.id}"></td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome" th:field="*{nome}">
+                </td>
+            </tr>
+            <tr>
+                <th>CPF</th>
+                <td>
+                    <input type="text" class="form-control" id="cpf" placeholder="CPF" th:field="*{cpf}">
+                </td>
+            </tr>
+            <tr>
+                <th>RG</th>
+                <td>
+                    <input type="text" class="form-control" id="rg" placeholder="RG" th:field="*{rg}">
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input type="text" class="form-control" id="email" placeholder="Email" th:field="*{email}">
+                </td>
+            </tr>
+            <tr>
+                <th>Endereço</th>
+                <td>
+                    <input type="text" class="form-control" id="endereco" placeholder="Endereço" th:field="*{endereco}">
+                </td>
+            </tr>
+            <tr>
+                <th>Profissão</th>
+                <td>
+                    <input type="text" class="form-control" id="profissao" placeholder="Profissão"
+                        th:field="*{profissao}">
+                </td>
+            </tr>
+            <tr>
+                <th>Entidade Empregadora</th>
+                <td>
+                    <input type="text" class="form-control" id="entidadeEmpregadora" placeholder="Entidade Empregadora"
+                        th:field="*{entidadeEmpregadora}">
+                </td>
+            </tr>
+            <tr>
+                <th>Rendimentos Auferidos</th>
+                <td>
+                    <input type="text" class="form-control" id="rendimentosAuferidos"
+                        placeholder="Rendimentos Auferidos" th:field="*{rendimentosAuferidos}">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </td>
+            </tr>
+        </form>
     </table>
+
 
 
 </body>

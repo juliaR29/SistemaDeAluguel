@@ -28,7 +28,6 @@ public class ClienteController {
 				if (file.isFile() && file.getName().endsWith(".txt")) {
 					Cliente cliente = Cliente.loadFromTextFile(file.getAbsolutePath());
 					clientes.add(cliente);
-
 				}
 			}
 			model.addAttribute("clientes", clientes);
@@ -43,7 +42,6 @@ public class ClienteController {
 	@PostMapping("/cliente")
 	public String createCliente(@ModelAttribute Cliente cliente) {
 		try {
-			// figure out a new sequencial id
 			File folder = new File("db/clientes");
 			File[] listOfFiles = folder.listFiles();
 			int id = 0;
@@ -68,9 +66,15 @@ public class ClienteController {
 		}
 	}
 
-	@DeleteMapping("/cliente/{i}")
+	@DeleteMapping("/cliente/{id}")
 	public String deleteClienteById(@PathVariable(value = "id") String id) {
-		return "";
+		try {
+			File file = new File("db/clientes/" + id + ".txt");
+			file.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/cliente";
 	}
 
 	@GetMapping("/cliente/{id}")
@@ -87,9 +91,16 @@ public class ClienteController {
 		return "/cliente-details";
 	}
 
-	@PutMapping("/cliente/{i}")
-	public String updateClienteById(@PathVariable(value = "id") String id) {
-		return "";
+	@PutMapping("/cliente/{id}")
+	public String updateClienteById(@PathVariable(value = "id") String id, @ModelAttribute Cliente cliente) {
+		try {
+			Cliente oldCliente = Cliente.loadFromTextFile("db/clientes/" + id + ".txt");
+			cliente.setSenha(oldCliente.getSenha());
+			cliente.saveToTextFile("db/clientes/" + id + ".txt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/cliente/" + id;
 	}
 
 }

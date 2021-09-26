@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <header th:include="menu :: menu"></header>
     <h1>Lista de Clientes</h1>
     <table>
         <thead>
@@ -23,6 +24,7 @@
                 <th>Profissão</th>
                 <th>Entidade Empregadora</th>
                 <th>Rendimentos Auferidos</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +40,14 @@
                 <td th:text="${cliente.profissao}"></td>
                 <td th:text="${cliente.entidadeEmpregadora}"></td>
                 <td th:text="${cliente.rendimentosAuferidos}"></td>
+                <td>
+                    <form th:action="@{/cliente/{id}(id=${cliente.id})}" method="post">
+                        <a th:href="@{/cliente/{id}(id=${cliente.id})}" class="btn btn-primary">Editar</a>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="id" th:value="${cliente.id}">
+                        <input type="submit" value="Excluir" class="btn btn-danger">
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -87,13 +97,13 @@
                 <input type="text" class="form-control" id="rendimentosAuferidos" placeholder="Rendimentos Auferidos"
                     th:field="*{rendimentosAuferidos}">
             </div>
-            <!-- <div class="form-group col-6">
+            <div class="form-group col-6">
                 <label for="senha">Senha</label>
                 <input type="password" class="form-control" id="senha" placeholder="Senha" th:field="*{senha}">
-            </div> -->
+            </div>
         </div>
         <div class="form-group col-6">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Criar</button>
         </div>
     </form>
 
