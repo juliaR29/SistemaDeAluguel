@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Detalhes do Automovel</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <header th:include="menu :: menu"></header>
+    <h1>Detalhes do Automovel: <span th:text="${automovel.modelo}"></span></h1>
+
+    <table>
+        <form th:action="@{/automovel/{id}(id=${automovel.id})}" th:object="${automovel}" method="post">
+            <input type="hidden" name="_method" value="PUT">
+            <tr>
+                <th>ID</th>
+                <td th:text="${automovel.id}"></td>
+            </tr>
+            <tr>
+                <th>Ano</th>
+                <td><input type="text" name="ano" th:value="${automovel.ano}"></td>
+            </tr>
+            <tr>
+                <th>Marca</th>
+                <td><input type="text" name="marca" th:value="${automovel.marca}"></td>
+            </tr>
+            <tr>
+                <th>Modelo</th>
+                <td><input type="text" name="modelo" th:value="${automovel.modelo}"></td>
+            </tr>
+            <tr>
+                <th>Placa</th>
+                <td><input type="text" name="placa" th:value="${automovel.placa}"></td>
+            </tr>
+            <tr>
+                <th>Preco</th>
+                <td><input type="text" name="preco" th:value="${automovel.preco}"></td>
+            </tr>
+        </form>
+    </table>
+
+
+
+</body>
+
+</html>
